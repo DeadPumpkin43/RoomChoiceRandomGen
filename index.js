@@ -1,5 +1,27 @@
 
 var Papa = require('papaparse');
+
+const fs = require('fs');
+const path = require('path');
+
+function createFileWithUniqueName(filepath, content = '') {
+    const dir = path.dirname(filepath);
+    const ext = path.extname(filepath);
+    const baseFilename = path.basename(filepath, ext);
+    
+    let currentPath = filepath;
+    let counter = 1;
+    
+    // Keep checking until we find an unused filename
+    while (fs.existsSync(currentPath)) {
+        currentPath = path.join(dir, `${baseFilename}(${counter})${ext}`);
+        counter++;
+    }
+    
+    // Create the file
+    fs.writeFileSync(currentPath, content);
+    return currentPath;
+}
 var choiceLength = 4;
 var peopleCount = 72;
 function getRandomInt(max) {
@@ -44,3 +66,4 @@ var unparsed = Papa.unparse({data:array2d,
     header:false
 });
 console.log(unparsed);
+createFileWithUniqueName("./test.csv",unparsed)
