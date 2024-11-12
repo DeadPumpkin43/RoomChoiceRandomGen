@@ -21,12 +21,12 @@ function createFileWithUniqueName(filepath, content = "") {
   fs.writeFileSync(currentPath, content);
   return currentPath;
 }
-var choiceLength = 4;
-var peopleCount = 72;
+var choiceLength = 5;
+var peopleCount = 600;
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-var people = Array.from({ length: 72 }, (_, i) => i + 1);
+var people = Array.from({ length: peopleCount }, (_, i) => i + 1);
 var array2d = [
   ["Name"].concat(Array.from({ length: choiceLength }, (_, i) => i + 1)),
 ];
